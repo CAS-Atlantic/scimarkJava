@@ -2,7 +2,7 @@ package jnt.scimark2;
 
 public class SOR
 {
-	public static final double num_flops(int M, int N, int num_iterations)
+	public static final double num_flops(int M, int N, long num_iterations)
 	{
 		double Md = (double) M;
 		double Nd = (double) N;
@@ -11,7 +11,7 @@ public class SOR
 		return (Md-1)*(Nd-1)*num_iterD*6.0;
 	}
 
-	public static final void execute(double omega, double G[][], int 
+	public static final void execute(double omega, double G[][], long 
 			num_iterations)
 	{
 		int M = G.length;

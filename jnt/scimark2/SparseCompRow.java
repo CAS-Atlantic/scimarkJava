@@ -5,7 +5,7 @@ public class SparseCompRow
 	/* multiple iterations used to make kernel have roughly
 		same granulairty as other Scimark kernels. */
 
-	public static double num_flops(int N, int nz, int num_iterations)
+	public static double num_flops(int N, int nz, long num_iterations)
 	{
 		/* Note that if nz does not divide N evenly, then the
 		   actual number of nonzeros used is adjusted slightly.
@@ -24,7 +24,7 @@ public class SparseCompRow
 	*/
 
 	public static void matmult( double y[], double val[], int row[],
-		int col[], double x[], int NUM_ITERATIONS)
+		int col[], double x[], long NUM_ITERATIONS)
 	{
 		int M = row.length - 1;
 
