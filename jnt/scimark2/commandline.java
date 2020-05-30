@@ -85,7 +85,7 @@ public class commandline
 		System.out.printf("SOR             Mflops: %8.2f    (%d x %d) \n", 
 			res[2].res, SOR_size, SOR_size);
 
-		res[3] = kernel.measureMonteCarlo(itter*1000, R);
+		res[3] = kernel.measureMonteCarlo(itter*100000, R);
 		System.out.printf("MonteCarlo:     Mflops: %8.2f  \n", 
 			res[3].res );
 
