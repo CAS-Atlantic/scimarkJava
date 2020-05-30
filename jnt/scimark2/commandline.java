@@ -31,7 +31,7 @@ public class commandline
 	public static void main(String args[])
 	{
 		// default to the (small) cache-contained version
-		double min_time = Constants.RESOLUTION_DEFAULT;
+		int itter = Constants.RESOLUTION_DEFAULT;
 
 		int FFT_size = Constants.FFT_SIZE;
 		int SOR_size =  Constants.SOR_SIZE;
@@ -64,36 +64,36 @@ public class commandline
 			}
 
 			if (args.length > current_arg)
-        		min_time = Double.valueOf(args[current_arg]).doubleValue();
+        		itter = Integer.valueOf(args[current_arg]);
         }
         
 
 		// run the benchmark
 		commandline.print_banner();
-		System.out.printf("Using %10.2f seconds min time per kenel.", min_time);
+		System.out.printf("Using %d itter per kenel.", itter);
 		System.out.printf("\n\n"); 
 
 		Results res[] = new Results[6];
 		res[0] = new Results();
 		Random R = new Random(Constants.RANDOM_SEED);
 
-		res[1] = kernel.measureFFT( FFT_size, min_time, R);
+		res[1] = kernel.measureFFT( FFT_size, itter, R);
  		System.out.printf("FFT             Mflops: %8.2f    (N=%d) \n", 
 			res[1].res, FFT_size);
 
-		res[2] = kernel.measureSOR( SOR_size, min_time, R);
+		res[2] = kernel.measureSOR( SOR_size, itter, R);
 		System.out.printf("SOR             Mflops: %8.2f    (%d x %d) \n", 
 			res[2].res, SOR_size, SOR_size);
 
-		res[3] = kernel.measureMonteCarlo(min_time, R);
+		res[3] = kernel.measureMonteCarlo(itter*1000, R);
 		System.out.printf("MonteCarlo:     Mflops: %8.2f  \n", 
 			res[3].res );
 
-		res[4] = kernel.measureSparseMatmult( Sparse_size_M, Sparse_size_nz, min_time, R);
+		res[4] = kernel.measureSparseMatmult( Sparse_size_M, Sparse_size_nz, itter, R);
 		System.out.printf("Sparse matmult  Mflops: %8.2f    (N=%d, nz=%d)  \n", 
 			res[4].res, Sparse_size_M, Sparse_size_nz);
 
-		res[5] = kernel.measureLU( LU_size, min_time, R);
+		res[5] = kernel.measureLU( LU_size, itter, R);
 		System.out.printf("LU              Mflops: %8.2f    (M=%d, N=%d) \n", 
 			res[5].res, LU_size, LU_size);
 
@@ -108,11 +108,11 @@ public class commandline
 		System.out.printf("************************************\n");
 		System.out.printf("\n");
 
-		System.out.printf("FFT reps:              %d\n", (long)res[1].cycles);
-		System.out.printf("SOR reps:              %d\n", (long)res[2].cycles);
-		System.out.printf("Montel Carlo reps:     %d\n", (long)res[3].cycles);
-		System.out.printf("Sparse MatMult repss:  %d\n", (long)res[4].cycles);
-		System.out.printf("LU reps:               %d\n", (long)res[5].cycles);
+		System.out.printf("FFT time:              %8.2f\n", res[1].estimated_time);
+		System.out.printf("SOR time:              %8.2f\n", res[2].estimated_time);
+		System.out.printf("Montel Carlo time:     %8.2f\n", res[3].estimated_time);
+		System.out.printf("Sparse MatMult time:  %8.2f\n", res[4].estimated_time);
+		System.out.printf("LU time:               %8.2f\n", res[5].estimated_time);
 		System.out.printf("\n");
 		System.out.printf("checksum:              %20.16e\n" ,res[0].sum);
 

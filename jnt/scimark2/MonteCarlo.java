@@ -3,7 +3,7 @@ package jnt.scimark2;
 /**
  Estimate Pi by approximating the area of a circle.
 
- How: generate N random numbers in the unit square, (0,0) to (1,1)
+ How: generate N Random numbers in the unit square, (0,0) to (1,1)
  and see how are within a radius of 1 or less, i.e.
  <pre>  
 
@@ -35,7 +35,7 @@ public class MonteCarlo
 
 	public static final double num_flops(long Num_samples)
 	{
-		// 3 flops in x^2+y^2 and 1 flop in random routine
+		// 3 flops in x^2+y^2 and 1 flop in Random routine
 
 		return ((double) Num_samples)* 4.0;
 

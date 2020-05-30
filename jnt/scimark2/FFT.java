@@ -56,7 +56,7 @@ public class FFT {
       diff += d*d; }
     return Math.sqrt(diff/nd); }
 
-  /** Make a random array of n (complex) elements. */
+  /** Make a Random array of n (complex) elements. */
   public static double[] makeRandom(int n){
     int nd = 2*n;
     double data[] = new double[nd];

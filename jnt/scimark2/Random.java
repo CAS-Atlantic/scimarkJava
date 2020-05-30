@@ -1,6 +1,6 @@
 package jnt.scimark2;
 
-/* Random.java based on Java Numerical Toolkit (JNT) Random.UniformSequence
+/* Random .java based on Java Numerical Toolkit (JNT) Random .UniformSequence
 	class.  We do not use Java's own java.util.Random so that we can compare
 	results with equivalent C and Fortran coces.
 */
@@ -40,15 +40,15 @@ public class Random {
    ------------------------------------------------------------------------------ */
 
 /**
-   Initializes a sequence of uniformly distributed quasi random numbers with a
+   Initializes a sequence of uniformly distributed quasi Random numbers with a
    seed based on the system clock.
 */
-  public Random () {
+  public Random() {
     initialize( (int) System.currentTimeMillis());
   }
 
 /**
-   Initializes a sequence of uniformly distributed quasi random numbers on a
+   Initializes a sequence of uniformly distributed quasi Random numbers on a
    given half-open interval [left,right) with a seed based on the system
    clock.
 
@@ -60,7 +60,7 @@ public class Random {
 
        The right endpoint of the half-open interval [left,right).
 */
-  public Random ( double left, double right) {
+  public Random( double left, double right) {
     initialize( (int) System.currentTimeMillis() );
     this.left = left;
     this.right = right;
@@ -69,25 +69,25 @@ public class Random {
   }
 
 /**
-   Initializes a sequence of uniformly distributed quasi random numbers with a
+   Initializes a sequence of uniformly distributed quasi Random numbers with a
    given seed.
 
 @param <B>seed</B> (int)<BR>
 
-       The seed of the random number generator.  Two sequences with the same
+       The seed of the Random number generator.  Two sequences with the same
        seed will be identical.
 */
-  public Random (int seed) {
+  public Random(int seed) {
     initialize( seed);
   }
 
 /**
-   Initializes a sequence of uniformly distributed quasi random numbers
+   Initializes a sequence of uniformly distributed quasi Random numbers
    with a given seed on a given half-open interval [left,right).
 
 @param <B>seed</B> (int)<BR>
 
-       The seed of the random number generator.  Two sequences with the same
+       The seed of the Random number generator.  Two sequences with the same
        seed will be identical.
 
 @param <B>left</B> (double)<BR>
@@ -98,7 +98,7 @@ public class Random {
 
        The right endpoint of the half-open interval [left,right).
 */
-  public Random (int seed, double left, double right) {
+  public Random(int seed, double left, double right) {
     initialize( seed);
     this.left = left;
     this.right = right;
@@ -111,7 +111,7 @@ public class Random {
    ------------------------------------------------------------------------------ */
 
 /**
-   Returns the next random number in the sequence.
+   Returns the next Random number in the sequence.
 */
   public final synchronized double nextDouble () {
 
@@ -138,7 +138,7 @@ public class Random {
   } 
 
 /**
-   Returns the next N random numbers in the sequence, as
+   Returns the next N Random numbers in the sequence, as
    a vector.
 */
   public final synchronized void nextDoubles (double x[]) 

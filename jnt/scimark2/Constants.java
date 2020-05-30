@@ -3,7 +3,7 @@ package jnt.scimark2;
 public class Constants
 {
 
-	public static final double RESOLUTION_DEFAULT = 2.0;  /*secs*/
+	public static final int RESOLUTION_DEFAULT = 30;  /*itterm*/
 	public static final int RANDOM_SEED = 101010;
 
 	// default: small (cache-contained) problem sizes

@@ -5,37 +5,32 @@ public class kernel
 	// each measurement returns approx Mflops
 
 
-	public static Results measureFFT(int N, double mintime, Random R)
+	public static Results measureFFT(int N, int itter, Random R)
 	{
 		Results output = new Results();
 
 		// initialize FFT data as complex (N real/img pairs)
 		double x[] = RandomVector(2*N, R);
 		double oldx[] = NewVectorCopy(x);
-		output.cycles = 1;
 		Stopwatch Q = new Stopwatch();
 
-		while(true)
-		{
-			Q.start();
-			for (int i=0; i<output.cycles; i++)
-			{
-				FFT.transform(x);	// forward transform
-				FFT.inverse(x);		// backward transform
-			}
-			Q.stop();
-			if (Q.read() >= mintime)
-				break;
 
-			output.cycles *= 2;
+		Q.start();
+		for (int i=0; i<itter; i++)
+		{
+			FFT.transform(x);	// forward transform
+			FFT.inverse(x);		// backward transform
 		}
+		Q.stop();
+		output.estimated_time = Q.read();
+
 		// approx Mflops
 
 		final double EPS = 1.0e-10;
 		if ( FFT.test(x) / N > EPS )
 			output.res = 0.0;
 		else
-			output.res = FFT.num_flops(N)*output.cycles/ Q.read() * 1.0e-6;
+			output.res = FFT.num_flops(N)*itter/ output.estimated_time * 1.0e-6;
 
         for (int i=0; i<2*N; i++)
         {
@@ -47,24 +42,20 @@ public class kernel
 	}
 
 
-	public static Results measureSOR(int N, double min_time, Random R)
+	public static Results measureSOR(int N, int itter, Random R)
 	{
 		Results output = new Results();
 		double G[][] = RandomMatrix(N, N, R);
 
 		Stopwatch Q = new Stopwatch();
-		output.cycles = 1;
-		while(true)
-		{
-			Q.start();
-			SOR.execute(1.25, G, output.cycles);
-			Q.stop();
-			if (Q.read() >= min_time) break;
 
-			output.cycles *= 2;
-		}
+		Q.start();
+		SOR.execute(1.25, G, itter);
+		Q.stop();
+
 		// approx Mflops
-		output.res = SOR.num_flops(N, N, output.cycles) / Q.read() * 1.0e-6;
+		output.estimated_time =  Q.read();
+		output.res = SOR.num_flops(N, N, itter) / output.estimated_time * 1.0e-6;
         for (int i=0; i<N; i++)
           for (int j=0; j<N; j++)
               output.sum += G[i][j];
@@ -73,29 +64,24 @@ public class kernel
 		return output;
 	}
 
-	public static Results measureMonteCarlo(double min_time, Random R)
+	public static Results measureMonteCarlo(int itter, Random R)
 	{
 		Results output = new Results();
 		Stopwatch Q = new Stopwatch();
 
-		output.cycles = 1;
-		while(true)
-		{
-			Q.start();
-			output.sum += MonteCarlo.integrate(output.cycles);
-			Q.stop();
-			if (Q.read() >= min_time) break;
+		Q.start();
+		output.sum += MonteCarlo.integrate(itter);
+		Q.stop();
 
-			output.cycles *= 2;
-		}
 		// approx Mflops
-		output.res = MonteCarlo.num_flops(output.cycles) / Q.read() * 1.0e-6;
+		output.estimated_time =  Q.read();
+		output.res = MonteCarlo.num_flops(itter) / output.estimated_time * 1.0e-6;
 		return output;
 	}
 
 
 	public static Results measureSparseMatmult(int N, int nz, 
-			double min_time, Random R)
+			int itter, Random R)
 	{
 		Results output = new Results();
 		// initialize vector multipliers and storage for result
@@ -151,18 +137,13 @@ public class kernel
 
 		Stopwatch Q = new Stopwatch();
 
-		output.cycles = 1;
-		while(true)
-		{
-			Q.start();
-			SparseCompRow.matmult(y, val, row, col, x, output.cycles);
-			Q.stop();
-			if (Q.read() >= min_time) break;
+		Q.start();
+		SparseCompRow.matmult(y, val, row, col, x, itter);
+		Q.stop();
 
-			output.cycles *= 2;
-		}
 		// approx Mflops
-		output.res = SparseCompRow.num_flops(N, nz, output.cycles) / Q.read() * 1.0e-6;
+		output.estimated_time =  Q.read();
+		output.res = SparseCompRow.num_flops(N, nz, itter) / output.estimated_time * 1.0e-6;
 
         for (int i=0; i<N; i++)
             output.sum += y[i];
@@ -172,7 +153,7 @@ public class kernel
 	}
 
 
-	public static Results measureLU(int N, double min_time, Random R)
+	public static Results measureLU(int N, int itter, Random R)
 	{
 		Results output = new Results();
 		// compute approx Mlfops, or O if LU yields large errors
@@ -183,20 +164,15 @@ public class kernel
 
 		Stopwatch Q = new Stopwatch();
 
-		output.cycles = 1;
-		while(true)
+		Q.start();
+		for (int i=0; i<itter; i++)
 		{
-			Q.start();
-			for (int i=0; i<output.cycles; i++)
-			{
-				CopyMatrix(lu, A);
-				LU.factor(lu, pivot);
-			}
-			Q.stop();
-			if (Q.read() >= min_time) break;
-
-			output.cycles *= 2;
+			CopyMatrix(lu, A);
+			LU.factor(lu, pivot);
 		}
+		Q.stop();
+
+		output.estimated_time =  Q.read();
 
 
 		// verify that LU is correct
@@ -209,7 +185,7 @@ public class kernel
 		if ( normabs(b, matvec(A,x)) / N > EPS )
 			output.res = 0.0;
 		else //return approx Mflops
-			output.res = LU.num_flops(N) * output.cycles / Q.read() * 1.0e-6;
+			output.res = LU.num_flops(N) * itter / output.estimated_time * 1.0e-6;
 
         for (int i=0; i<N; i++)
           for (int j=0; j<N; j++)
