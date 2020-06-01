@@ -63,7 +63,7 @@ public class commandline
 			kernel.measureSOR( Constants.SOR_SIZE, itter, R));
 
 		System.out.printf("Montel Carlo time:     %8.2f\n", 
-			kernel.measureMonteCarlo(itter*Constants.SPARSE_SIZE_M, R));
+			kernel.measureMonteCarlo10k(itter, R));
 
 		System.out.printf("Sparse MatMult time:  %8.2f\n", 
 			kernel.measureSparseMatmult( Constants.SPARSE_SIZE_M, Constants.SPARSE_SIZE_nz, itter, R));
