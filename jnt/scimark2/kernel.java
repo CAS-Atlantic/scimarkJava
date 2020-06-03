@@ -37,12 +37,12 @@ public class kernel
 		return Q.read();
 	}
 
-	public static double measureMonteCarlo10k(int itter, Random R)
+	public static double measureMonteCarlo(int itter, Random R)
 	{
 		Stopwatch Q = new Stopwatch();
 
 		Q.start();
-		MonteCarlo.integrate(itter*10000);
+		MonteCarlo.integrate(itter*Constants.MONTECARLO_ITTER);
 		Q.stop();
 
 		return Q.read();

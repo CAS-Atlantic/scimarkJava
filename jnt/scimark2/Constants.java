@@ -12,5 +12,6 @@ public class Constants
 	public static final int SPARSE_SIZE_M = 100000;
 	public static final int SPARSE_SIZE_nz = 1000000;
 	public static final int LU_SIZE = 1000;
+	public static final int MONTECARLO_ITTER = 1000000;
 }
 
