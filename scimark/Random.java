@@ -1,4 +1,4 @@
-package jnt.scimark2;
+package scimark;
 
 /* Random .java based on Java Numerical Toolkit (JNT) Random .UniformSequence
 	class.  We do not use Java's own java.util.Random so that we can compare
@@ -229,12 +229,25 @@ public class Random {
 		}
 	}
   }
+  public double[][] RandomMatrix(int M, int N)
+  {
+  		double A[][] = new double[M][N];
 
-		
-   
+        for (int i=0; i<N; i++)
+			for (int j=0; j<N; j++)
+            	A[i][j] = this.nextDouble();
+		return A;
+	}
 
+	public double[] RandomVector(int N)
+	{
+		double A[] = new double[N];
 
-
+		for (int i=0; i<N; i++)
+			A[i] = this.nextDouble();
+		return A;
+	}
+  
 /*----------------------------------------------------------------------------
                            PRIVATE METHODS
   ------------------------------------------------------------------------ */

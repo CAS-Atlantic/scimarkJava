@@ -1,4 +1,4 @@
-package jnt.scimark2;
+package scimark;
 
 /**
  Estimate Pi by approximating the area of a circle.
@@ -30,24 +30,10 @@ package jnt.scimark2;
 */
 
 public class MonteCarlo
-{
-	final static int SEED = 113;
+{	
 
-	public static final double num_flops(long Num_samples)
+	public static final double integrate(long Num_samples, Random R)
 	{
-		// 3 flops in x^2+y^2 and 1 flop in Random routine
-
-		return ((double) Num_samples)* 4.0;
-
-	}
-
-	
-
-	public static final double integrate(long Num_samples)
-	{
-
-		Random R = new Random(SEED);
-
 
 		int under_curve = 0;
 		for (int count=0; count<Num_samples; count++)
@@ -63,5 +49,20 @@ public class MonteCarlo
 		return ((double) under_curve / Num_samples) * 4.0;
 	}
 
+	public static double measure(int N, int itter, Random R)
+	{
+		Stopwatch Q = new Stopwatch();
 
+		Q.start();
+		MonteCarlo.integrate(itter*N, R);
+		Q.stop();
+
+		return Q.read();
+	}
+
+    public static void main(String args[])
+	{
+		commandline cmd = new commandline(args);
+		cmd.print_result("Monte Carlo", MonteCarlo.measure(Constants.MONTECARLO_ITTER, cmd.itter, cmd.R));
+	}
 }

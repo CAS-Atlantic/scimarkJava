@@ -1,4 +1,4 @@
-package jnt.scimark2;
+package scimark;
 
 public class Results
 {
