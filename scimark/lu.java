@@ -271,12 +271,13 @@ public class lu {
         Q.start();
         for (int i = 0; i < itter; i++) {
             CopyMatrix(lu, A);
-            lu.factor(lu, pivot);
+            factor(lu, pivot);
         }
         Q.stop();
 
         return Q.read();
     }
+    
     public static void main(String args[])
 	{
 		commandline cmd = new commandline(args);
