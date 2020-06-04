@@ -213,9 +213,9 @@ public class lu {
         @param b    (in/out) On input, the right-hand side.
                     On output, the solution vector.
     */
-    public static void solve(double LU[][], int pvt[], double b[]) {
-        int M = LU.length;
-        int N = LU[0].length;
+    public static void solve(double LU_arr[][], int pvt[], double b[]) {
+        int M = LU_arr.length;
+        int N = LU_arr[0].length;
         int ii = 0;
 
         for (int i = 0; i < M; i++) {
@@ -224,7 +224,7 @@ public class lu {
 
             b[ip] = b[i];
             if (ii == 0)
-                for (int j = ii; j < i; j++) sum -= LU[i][j] * b[j];
+                for (int j = ii; j < i; j++) sum -= LU_arr[i][j] * b[j];
             else if (sum == 0.0)
                 ii = i;
             b[i] = sum;
@@ -232,8 +232,8 @@ public class lu {
 
         for (int i = N - 1; i >= 0; i--) {
             double sum = b[i];
-            for (int j = i + 1; j < N; j++) sum -= LU[i][j] * b[j];
-            b[i] = sum / LU[i][i];
+            for (int j = i + 1; j < N; j++) sum -= LU_arr[i][j] * b[j];
+            b[i] = sum / LU_arr[i][i];
         }
     }
 
@@ -271,7 +271,7 @@ public class lu {
         Q.start();
         for (int i = 0; i < itter; i++) {
             CopyMatrix(lu, A);
-            LU.factor(lu, pivot);
+            lu.factor(lu, pivot);
         }
         Q.stop();
 

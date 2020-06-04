@@ -54,7 +54,7 @@ public class monte_carlo
 		Stopwatch Q = new Stopwatch();
 
 		Q.start();
-		MonteCarlo.integrate(itter*N, R);
+		monte_carlo.integrate(itter*N, R);
 		Q.stop();
 
 		return Q.read();

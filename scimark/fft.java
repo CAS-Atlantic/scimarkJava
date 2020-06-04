@@ -172,8 +172,8 @@ public class fft {
 
         Q.start();
         for (int i = 0; i < itter; i++) {
-            FFT.transform(x); // forward transform
-            FFT.inverse(x); // backward transform
+            fft.transform(x); // forward transform
+            fft.inverse(x); // backward transform
         }
         Q.stop();
         return Q.read();
