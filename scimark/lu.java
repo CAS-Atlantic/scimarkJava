@@ -280,6 +280,6 @@ public class lu {
     public static void main(String args[])
 	{
 		commandline cmd = new commandline(args);
-		cmd.print_result("LU", LU.measure( Constants.LU_SIZE, cmd.itter, cmd.R));
+		cmd.print_result("lu", lu.measure( Constants.LU_SIZE, cmd.itter, cmd.R));
 	}
 }

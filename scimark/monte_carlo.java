@@ -63,6 +63,6 @@ public class monte_carlo
     public static void main(String args[])
 	{
 		commandline cmd = new commandline(args);
-		cmd.print_result("Monte Carlo", MonteCarlo.measure(Constants.MONTECARLO_ITTER, cmd.itter, cmd.R));
+		cmd.print_result("monte_carlo", monte_carlo.measure(Constants.MONTECARLO_ITTER, cmd.itter, cmd.R));
 	}
 }

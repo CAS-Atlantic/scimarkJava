@@ -182,6 +182,6 @@ public class fft {
     public static void main(String args[])
 	{
 		commandline cmd = new commandline(args);
-		cmd.print_result("FFT",FFT.measure(Constants.FFT_SIZE, cmd.itter, cmd.R));
+		cmd.print_result("fft",fft.measure(Constants.FFT_SIZE, cmd.itter, cmd.R));
 	}
 }

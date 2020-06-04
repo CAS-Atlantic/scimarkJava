@@ -84,6 +84,6 @@ public class sparse {
     public static void main(String args[])
 	{
 		commandline cmd = new commandline(args);
-		cmd.print_result("SparseMatMult", SparseCompRow.measure(Constants.SPARSE_SIZE_M, Constants.SPARSE_SIZE_nz, cmd.itter, cmd.R));
+		cmd.print_result("sparse", sparse.measure(Constants.SPARSE_SIZE_M, Constants.SPARSE_SIZE_nz, cmd.itter, cmd.R));
 	}
 }

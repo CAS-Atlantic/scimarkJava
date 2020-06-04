@@ -39,6 +39,6 @@ public class sor {
     public static void main(String args[])
 	{
 		commandline cmd = new commandline(args);
-		cmd.print_result("SOR", SOR.measure(Constants.SOR_SIZE, cmd.itter, cmd.R));
+		cmd.print_result("sor", sor.measure(Constants.SOR_SIZE, cmd.itter, cmd.R));
 	}
 }
