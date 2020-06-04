@@ -1,6 +1,6 @@
 package scimark;
 
-public class SOR {
+public class sor {
     public static final void execute(double omega, double G[][], long num_iterations) {
         int M = G.length;
         int N = G[0].length;

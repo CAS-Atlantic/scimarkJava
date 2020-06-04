@@ -1,6 +1,6 @@
 package scimark;
 
-public class SparseCompRow {
+public class sparse {
     /* computes  a matrix-vector multiply with a sparse matrix
             held in compress-row format.  If the size of the matrix
             in MxN with nz nonzeros, then the val[] is the nz nonzeros,

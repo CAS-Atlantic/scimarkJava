@@ -14,7 +14,7 @@ package scimark;
 /* See {@link ComplexDoubleFFT ComplexDoubleFFT} for details of data layout.
  */
 
-public class FFT {
+public class fft {
     /** Compute Fast Fourier Transform of (complex) data, in place.*/
     public static void transform(double data[]) {
         transform_internal(data, -1);

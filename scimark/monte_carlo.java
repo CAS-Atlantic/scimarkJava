@@ -29,7 +29,7 @@ package scimark;
 
 */
 
-public class MonteCarlo
+public class monte_carlo
 {	
 
 	public static final double integrate(long Num_samples, Random R)

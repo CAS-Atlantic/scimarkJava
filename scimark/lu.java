@@ -10,7 +10,7 @@ package scimark;
 
 
 */
-public class LU {
+public class lu {
     /**
         Returns a <em>copy</em> of the compact LU factorization.
         (useful mainly for debugging.)
@@ -99,7 +99,7 @@ public class LU {
         @param A (in) the matrix to associate with this
                 factorization.
     */
-    public LU(double A[][]) {
+    public lu(double A[][]) {
         int M = A.length;
         int N = A[0].length;
 
